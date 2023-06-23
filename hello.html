@@ -1,0 +1,114 @@
+<html>
+<style>
+  body{
+    background-color: white;
+  }
+
+  #title {
+    font-family: arial;
+    font-size: 64;
+  }
+
+  #slide {
+    position: absolute;
+    z-index: 9;
+    background-color: white;
+    border: 5px solid black;
+    text-align: center;
+    word-wrap: break-word;
+    border-top-left-radius: 22px;
+    border-top-right-radius: 22px;
+  }
+
+  #slideheader {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+    background: linear-gradient(to bottom, #2196F3, #9621F3);
+    color: #fff;
+    border-radius: 2000px;
+    box-shadow: 10;
+  }
+
+  p{
+    font-family: arial;
+    font-size: 18;
+    padding: 5px;
+    width: auto;
+    word-wrap: break-word;
+  }
+
+  div{
+    font-family: arial;
+    font-size: 24;
+    border: 5px solid black;
+    padding: 5px;
+    width: auto;
+    word-wrap: break-word;
+  }
+
+  #slide_image{
+    width: inherit;
+    word-wrap: break-word;
+    image
+  }
+
+</style>
+<head>
+</head>
+<body>
+  <h1 id=title><a href='about.html'>nathan</a>'s cool stuff</h1>
+
+  <div id="slide" style="top: 121px; left: 225px; width:290;">
+    <div id="slideheader">Sublimation</div>
+    <img src="sources\Sub\sublimation.png" id=slide_image>
+  </div>
+</body>
+
+<script>
+//Make the DIV element draggagle:
+dragElement(document.getElementById("slide"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
+
+</html>
