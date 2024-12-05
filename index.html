@@ -1,23 +1,74 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Under Maintenance</title>
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 	<style>
 		@font-face { font-family: Syne; src: url('sources/fonts/Syne-Regular.otf'); font-weight: normal; font-style: normal; }
 		@font-face { font-family: Syne; src: url('sources/fonts/Syne-Bold.otf'); font-weight: bold; font-style: normal; }
 		@font-face { font-family: Syne; src: url('sources/fonts/Syne-Extra.otf'); font-weight: 999; font-style: normal; }
 		a {
-		   font-family: Syne;
-		   font-weight: bold;
-		   font-style: normal;
+			font-family: Syne;
+			font-weight: bold;
+			font-style: normal;
 		}
 		p {
-		   font-family: Syne;
-		   font-weight: normal;
-		   font-style: normal;
-		}		
+			font-family: Syne;
+			font-weight: normal;
+			font-style: normal;
+		}	
+		body{
+			margin: 0;
+		}
+		footer{
+			margin: 0;
+		}
+		
+		.gallery-container {
+			position: relative;
+			overflow: hidden;
+			width: 100%;
+			background-color: #f4f4f4;
+		}
+		
+		.gallery-track {
+			display: flex;
+			transition: transform 0.5s ease;
+		}
+		
+		.gallery-track img {
+			height: 400px; /* Sets consistent height for all images */
+			object-fit: cover; /* Maintains aspect ratio while filling height */
+			flex-shrink: 0; /* Prevents images from shrinking */
+			pointer-events: none
+		}
 	</style>
 </head>
 <body>
-	<div style="text-align: center; margin-top:200px;">
+	<div class="gallery-container">
+		<div class="gallery-track">
+			<img src="sources/cover.png" alt="The Sound of Sex Title Image">
+			<img src="sources/YESLORDYES.gif" alt="Jesus morphing into a phallus animated gif">
+			<img src="sources/Movie01.jpg" alt="Brain scan. time.">
+			<img src="sources/Behance2.png" alt="infographic on brain during sex.">
+			<img src="sources/all must be liberated 1.png" alt="chinese propaganda. all must be liberated">
+			<img src="sources/david.gif" alt="statue of david">
+			<img src="sources/Sub/Sublimation.png" alt="Man with hole in chest stares at painting of moon">			
+			<img src="sources/Movie04.jpg" alt="scratches on film">
+			<!-- Duplicate images for looping -->
+			<img src="sources/cover.png" alt="The Sound of Sex Title Image">
+			<img src="sources/YESLORDYES.gif" alt="Jesus morphing into a phallus animated gif">
+			<img src="sources/Movie01.jpg" alt="Brain scan. time.">
+			<img src="sources/Behance2.png" alt="infographic on brain during sex.">
+			<img src="sources/all must be liberated 1.png" alt="chinese propaganda. all must be liberated">
+			<img src="sources/david.gif" alt="statue of david">
+			<img src="sources/Sub/Sublimation.png" alt="Man with hole in chest stares at painting of moon">			
+			<img src="sources/Movie04.jpg" alt="scratches on film">
+		</div>
+	</div>
+	<div style="text-align: center; margin-top:100px;">
 		<img src="sorry.png" alt="Under Maintenance" style="width:50%";>
 	</div>
 </body>
@@ -25,11 +76,111 @@
 	<p></p>
 	<nav>
 		<a href="https://www.instagram.com/nathans.cool.stuff/"	target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">instagram</a> |		
-		<a href="https://vimeo.com/user139898567" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">vimeo</a> |
+		<a href="https://vimeo.com/nathanrussell" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">vimeo</a> |
 		<a href="https://www.behance.net/nathanrussell8" 		target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">behance</a> |
-		<a href="mailto:nathanrussell@myyahoo.com" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">email</a>
+		<a href="mailto:designer@nathanscoolstuff.com"			target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">email</a>
 	</nav>
 	<p style="font-size: 0.9em; font-weight: normal; color: #b55;">&copy; 2024 Nathan Russell. All rights reserved.</p>
-  </footer>
-  
+</footer>
+
+<script>
+	const container = document.querySelector('.gallery-container');
+	const track = document.querySelector('.gallery-track');
+	
+	let isDragging = false;
+	let currentTransform;
+	let startX;
+	let scrollLeft;
+	let animationInterval;
+	let userInteracted = false;
+	const autoScrollDelay = 3500; // Delay in milliseconds (3.5 seconds)
+	const autoScrollSpeed = 1; // Pixels to move per frame
+	const trackWidth = track.scrollWidth / 2; // Half because images are duplicated
+	
+	// Mouse down event: Start dragging
+	container.addEventListener('mousedown', (e) => {
+		isDragging = true;
+		container.style.cursor = 'grabbing';
+		startX = e.pageX - container.offsetLeft;
+		scrollLeft = track.style.transform ? parseFloat(track.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
+		stopAutoScroll();
+		userInteracted = true;
+	});
+	
+	// Mouse move event: Dragging
+	container.addEventListener('mousemove', (e) => {
+		if (!isDragging) return;
+		e.preventDefault();
+		const x = e.pageX - container.offsetLeft;
+		const walk = x - startX;
+		track.style.transition = 'none';
+		if ((scrollLeft + walk) <= 0) {
+			track.style.transform = `translateX(${scrollLeft + walk}px)`;
+			forceloop();
+		}
+	});
+	
+	// Mouse up or leave event: Stop dragging
+	container.addEventListener('mouseup', () => {
+		isDragging = false;
+		container.style.cursor = 'grab';
+		resetAutoScroll();
+	});
+	
+	container.addEventListener('mouseleave', () => {
+		isDragging = false;
+		container.style.cursor = 'grab';
+		resetAutoScroll();
+	});
+	
+	// Auto-scroll function
+	function startAutoScroll() {
+		stopAutoScroll();
+		animationInterval = setInterval(() => {
+			track.style.transition = 'none';
+			currentTransform = track.style.transform
+			? parseFloat(track.style.transform.replace('translateX(', '').replace('px)', ''))
+			: 0;
+
+			// track.style.transition = 'transform 0.1s linear'; // Smooth scroll
+			track.style.transform = `translateX(${currentTransform - autoScrollSpeed}px)`;
+			forceloop();
+		}, 10); // Move 1px every 10ms
+	}
+	
+	function forceloop(){
+		currentTransform = track.style.transform
+		? parseFloat(track.style.transform.replace('translateX(', '').replace('px)', ''))
+		: 0;
+		// If at the end of the track, reset position for seamless loop
+		if (Math.abs(currentTransform) >= trackWidth) {
+			// track.style.transition = 'none'; // Disable transition for instant jump
+			track.style.transform = `translateX(${trackWidth+currentTransform}px)`;
+		// } else if (Math.abs(currentTransform) < trackWidth/2) {
+			// track.style.transform = `translateX(${trackWidth-currentTransform}px)`;
+		}
+	}
+	
+	function stopAutoScroll() {
+		clearInterval(animationInterval);
+	}
+	
+	function resetAutoScroll() {
+		stopAutoScroll();
+		setTimeout(() => {
+			if (!isDragging && userInteracted) {
+				startAutoScroll();
+			}
+		}, autoScrollDelay);
+	}
+	
+	// Start the auto-scroll after the initial delay
+	setTimeout(() => {
+		if (!userInteracted) {
+			startAutoScroll();
+		}
+	}, autoScrollDelay);
+	
+	startAutoScroll();
+</script>
 </html>
