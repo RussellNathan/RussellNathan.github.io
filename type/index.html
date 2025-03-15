@@ -1,0 +1,196 @@
+<html>
+<head>
+  <title>nathanscoolstuff</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<style>
+		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Regular.otf'); font-weight: normal; font-style: normal; }
+		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Bold.otf'); font-weight: bold; font-style: normal; }
+		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Extra.otf'); font-weight: 999; font-style: normal; }
+		a {
+		   font-family: Syne;
+		   font-weight: bold;
+		   font-style: normal;
+		}
+		h1{
+			font-family: Syne;
+			font-weight: bold;
+			font-style: normal;
+			text-align: center;
+		}
+		p {
+		   font-family: Syne;
+		   font-weight: normal;
+		   font-style: normal;
+		}
+
+		.grid-container {
+            column-count: 3; /* Adjust the number of columns */
+            column-gap: 15px;
+            width: 90%;
+            margin:auto;
+        }
+        .grid-item {
+            break-inside: avoid;
+            margin-bottom: 5px;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+            cursor: zoom-in;
+        }
+        .grid-item img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Fullscreen Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow: hidden;
+			cursor: zoom-out;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            cursor: zoom-in;
+            transition: transform 0.2s ease-out;
+            position: absolute;
+        }
+        .zoomed {
+            transform: scale(2);
+            cursor: none;
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 888px) {
+            .grid-container {
+                column-count: 2;
+            }
+			.grid-item {
+				padding: 1px;
+			}
+        }
+        @media (max-width: 600px) {
+            .grid-container {
+                column-count: 1;
+            }
+			.grid-item {
+				padding: 5px;
+			}
+        }
+	</style>
+</head>
+<body>
+
+	<h1 style = "font-size: 4em; text-align: center; padding: 0.4em 0;">print and web</h1>
+	
+	<div class="grid-container">
+		<div class="grid-item"><img src="/sources/salient/SNC-issue3love.png"><p style = "padding: 0em 0.4em;">Sunday Night Cinema: Love Issue</p></div>
+		<div class="grid-item"><img src="/sources/salient/SNC-issue4music-redacted.png"><p style = "padding: 0em 0.4em;">Sunday Night Cinema: Music Issue (redacted)</p></div>
+		<div class="grid-item"><img src="/sources/SoS/Sound of Sex_Cover.png"><p style = "padding: 0em 0.4em;">the sound of sex</p></div>
+		<div class="grid-item"><img src="/sources/salient/SNC-issue2drugs.png"><p style = "padding: 0em 0.4em;">Sunday Night Cinema Issue 2</p></div>
+		<div class="grid-item"><img src="/sources/SoS/Sound of Sex_1.png"><p style = "padding: 0em 0.4em;">the sound of sex pg.1</p></div>
+		<div class="grid-item"><img src="/sources/SoS/Sound of Sex_2.png"><p style = "padding: 0em 0.4em;">the sound of sex pg.2</p></div>
+	</div>
+
+	<!-- Fullscreen Lightbox -->
+	<div class="lightbox" id="lightbox">
+		<span class="close" onclick="closeLightbox()">&times;</span>
+		<img id="lightbox-img" src="">
+	</div>
+
+	<script>
+		const gridItems = document.querySelectorAll('.grid-item img');
+		const lightbox = document.getElementById('lightbox');
+		const lightboxImg = document.getElementById('lightbox-img');
+		let isZoomed = false;
+
+		// Open fullscreen mode
+		gridItems.forEach(img => {
+			img.addEventListener('click', () => {
+				lightboxImg.src = img.src;
+				lightbox.style.display = "flex"; // Show lightbox
+				resetZoom();
+			});
+		});
+
+		// Toggle zoom when clicking on the image
+		lightboxImg.addEventListener("click", () => {
+			if (isZoomed) {
+				resetZoom();
+			} else {
+				isZoomed = true;
+				lightboxImg.classList.add("zoomed");
+				lightboxImg.style.transform = "scale(2) translate(0, 0)";
+				lightboxImg.style.cursor = "none";
+			}
+		});
+
+		// Move image based on cursor position
+		lightbox.addEventListener("mousemove", (e) => {
+			if (!isZoomed) return;
+
+			const rect = lightbox.getBoundingClientRect();
+			const imgRect = lightboxImg.getBoundingClientRect();
+
+			let offsetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+			let offsetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+
+			let moveX = -offsetX * (imgRect.width * 0.25); // Move image based on cursor position
+			let moveY = -offsetY * (imgRect.height * 0.25);
+
+			lightboxImg.style.transform = `scale(2) translate(${moveX}px, ${moveY}px)`;
+		});
+
+		// Reset zoom
+		function resetZoom() {
+			isZoomed = false;
+			lightboxImg.classList.remove("zoomed");
+			lightboxImg.style.transform = "scale(1) translate(0, 0)";
+			lightboxImg.style.cursor = "zoom-in";
+		}
+
+		// Function to close lightbox
+		function closeLightbox() {
+			lightbox.style.display = "none";
+			resetZoom();
+		}
+
+		// Close on clicking outside image
+		lightbox.addEventListener('click', (e) => {
+			if (e.target === lightbox) {
+				closeLightbox();
+			}
+		});
+	</script>
+
+</body>
+<footer style="text-align: center; padding: 1em 0; border-top: 1px solid #ddd; margin-top:100px;">
+	<p></p>
+	<nav>
+		<a href="https://www.instagram.com/nathans.cool.stuff/"	target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">instagram</a> |		
+		<a href="https://vimeo.com/nathanrussell" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">vimeo</a> |
+		<a href="https://www.behance.net/nathanrussell8" 		target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">behance</a> |
+		<a href="mailto:nathanrussell@myyahoo.com" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">email</a>
+	</nav>
+	<p style="font-size: 0.9em; font-weight: normal; color: #b55;">&copy; 2025 Nathan Russell. All rights reserved.</p>
+  </footer>
+  
+</html>
