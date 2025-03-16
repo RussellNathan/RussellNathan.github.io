@@ -6,21 +6,67 @@
 		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Regular.otf'); font-weight: normal; font-style: normal; }
 		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Bold.otf'); font-weight: bold; font-style: normal; }
 		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Extra.otf'); font-weight: 999; font-style: normal; }
+		@font-face { font-family: Arka; src: url('/sources/fonts/Arka_-Regular.otf'); font-weight: bold; font-style: normal;}
 		a {
 		   font-family: Syne;
 		   font-weight: bold;
 		   font-style: normal;
 		}
 		h1{
-			font-family: Syne;
+			font-family: Arka;
 			font-weight: bold;
 			font-style: normal;
 			text-align: center;
+			color: rgb(255, 103, 209);
+			text-shadow: 
+				-1px -1px 0px rgb(0, 0, 0),
+				-1px 1px 0px rgb(0, 0, 0),
+				1px 1px 0px rgb(0, 0, 0),
+				1px -1px 0px rgb(0, 0, 0);
+			
+			margin:0;
 		}
 		p {
 		   font-family: Syne;
 		   font-weight: normal;
 		   font-style: normal;
+		}
+		body {
+			padding: 0px;
+			margin: 0;
+			/* background-color: #212121; */
+		}
+		header {
+			text-align: center;
+			padding: 1em 0 0 0;
+			/* border-bottom: 1px solid #ddd; */
+			background-color: rgb(51, 255, 78);
+			/* background-image: linear-gradient(to top, rgb(62, 48, 85), #af3); */
+			margin-bottom:40px;
+		}
+		footer {
+			text-align: center;
+			padding: 0 0 1em 0;
+			border-top: 1px solid #ddd;
+			background-color: #af3;
+			margin-top:100px;
+		}
+
+		.ornatetrim {
+			position: relative;		
+			margin: 0;	
+			padding: 15px;
+			border: 2px solid #a50;
+		}
+		.ornatetrim .virol {
+			margin-left: 0;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background: url("/sources/Border/virologic.png") repeat;
+			background-size:contain;
+			width: 100%;
+			height: 30px;
 		}
 
 		.grid-container {
@@ -51,7 +97,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(40, 10, 0, 0.8);
+			/* background-image: radial-gradient(rgba(41, 0, 0, 0.9),rgba(34, 77, 9, 0.685)); */
             display: none;
             justify-content: center;
             align-items: center;
@@ -97,9 +144,17 @@
         }
 	</style>
 </head>
-<body>
+<header>
+	<h1 style = "font-size: 7em; text-align: center; padding: 0.1em 0;">
+		<i>Print And web</i>
+	</h1>
 
-	<h1 style = "font-size: 4em; text-align: center; padding: 0.4em 0;">print and web</h1>
+	<!-- trim -->
+	<div class="ornatetrim" style="border-top: 2px dashed #a50;">
+		<div class="virol"></div>
+	</div>
+</header>
+<body>
 	
 	<div class="grid-container">
 		<div class="grid-item"><img src="/sources/salient/SNC-issue3love.png"><p style = "padding: 0em 0.4em;">Sunday Night Cinema: Love Issue</p></div>
@@ -108,6 +163,9 @@
 		<div class="grid-item"><img src="/sources/salient/SNC-issue2drugs.png"><p style = "padding: 0em 0.4em;">Sunday Night Cinema Issue 2</p></div>
 		<div class="grid-item"><img src="/sources/SoS/Sound of Sex_1.png"><p style = "padding: 0em 0.4em;">the sound of sex pg.1</p></div>
 		<div class="grid-item"><img src="/sources/SoS/Sound of Sex_2.png"><p style = "padding: 0em 0.4em;">the sound of sex pg.2</p></div>
+		<div class="grid-item"><img src="/sources/allmustbeliberated1.png"><p style = "padding: 0em 0.4em;">design assignment</p></div>
+		<div class="grid-item"><img src="/sources/david.gif"><p style = "padding: 0em 0.4em;">p5.js 3D shader</p></div>
+		<div class="grid-item"><img src="/sources/infantile.gif"><p style = "padding: 0em 0.4em;">Infantile Joy</p></div>
 	</div>
 
 	<!-- Fullscreen Lightbox -->
@@ -180,9 +238,11 @@
 			}
 		});
 	</script>
-
 </body>
-<footer style="text-align: center; padding: 1em 0; border-top: 1px solid #ddd; margin-top:100px;">
+<footer>
+	<div class="ornatetrim" style="border-bottom: 2px dashed #a50;">
+		<div class="virol"></div>
+	</div>
 	<p></p>
 	<nav>
 		<a href="https://www.instagram.com/nathans.cool.stuff/"	target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">instagram</a> |		
@@ -191,6 +251,6 @@
 		<a href="mailto:nathanrussell@myyahoo.com" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">email</a>
 	</nav>
 	<p style="font-size: 0.9em; font-weight: normal; color: #b55;">&copy; 2025 Nathan Russell. All rights reserved.</p>
-  </footer>
+</footer>
   
 </html>
