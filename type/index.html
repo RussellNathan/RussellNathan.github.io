@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>nathanscoolstuff</title>
+  <meta content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
 	<style>
 		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Regular.otf'); font-weight: normal; font-style: normal; }
@@ -126,12 +127,16 @@
             cursor: pointer;
         }
 
+		@media (mobile){}
         @media (max-width: 888px) {
             .grid-container {
                 column-count: 2;
             }
 			.grid-item {
 				padding: 1px;
+			}
+			.lightbox .close {
+				font-size: 44px;
 			}
         }
         @media (max-width: 600px) {
