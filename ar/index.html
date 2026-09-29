@@ -1,0 +1,346 @@
+<html>
+<head>
+  <title>nathanscoolstuff</title>
+  <meta content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+	<style>
+		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Regular.otf'); font-weight: normal; font-style: normal; }
+		@font-face { font-family: SyneMono; src: url('/sources/fonts/Syne-Mono.otf'); font-weight: normal; font-style: monospace; }
+		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Bold.otf'); font-weight: bold; font-style: normal; }
+		@font-face { font-family: Syne; src: url('/sources/fonts/Syne-Extra.otf'); font-weight: 999; font-style: normal; }
+		@font-face { font-family: Arka; src: url('/sources/fonts/Arka_-Regular.otf'); font-weight: bold; font-style: normal;}
+		a {
+		   font-family: Syne;
+		   font-weight: bold;
+		   font-style: normal;
+		}
+		h1{
+			font-family: Arka;
+			font-weight: bold;
+			font-style: normal;
+			text-align: center;
+			color: rgb(255, 103, 209);
+			text-shadow:
+				-1px -1px 0px rgb(0, 0, 0),
+				-1px 1px 0px rgb(0, 0, 0),
+				1px 1px 0px rgb(0, 0, 0),
+				1px -1px 0px rgb(0, 0, 0);
+
+			margin:0;
+		}
+		p {
+		   font-family: Syne;
+		   font-weight: normal;
+		   font-style: normal;
+		}
+		body {
+			padding: 0px;
+			margin: 0;
+			/*background-color: #af3;*/
+		}
+		header {
+			/* text-align: center; */
+			padding: 1em 0 0 0;
+			/* border-bottom: 1px solid #ddd; */
+			background-color: #af3;
+			/* background-image: linear-gradient(to top, rgb(62, 48, 85), #af3); */
+			margin-bottom:48px;
+		}
+		footer {
+			text-align: center;
+			padding: 0 0 1em 0;
+			border-top: 1px solid #ddd;
+			background-color: #af3;
+			margin-top:100px;
+		}
+
+		.ornatetrim {
+			position: relative;
+			margin: 0;
+			padding: 15px;
+			border: 2px solid #a50;
+		}
+		.ornatetrim .virol {
+			margin-left: 0;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background: url("/sources/Border/virologic.png") repeat;
+			background-size:contain;
+			width: 100%;
+			height: 30px;
+		}
+
+		.grid-container {
+            column-count: 5; /* Adjust the number of columns */
+            column-gap: 15px;
+            width: 90%;
+            margin:auto;
+        }
+        .grid-item {
+            break-inside: avoid;
+            margin-bottom: 5px;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+        }
+        .grid-item img {
+            cursor: zoom-in;
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .grid-item video {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-showcase {
+			padding: 1em 0 0 0;
+			border-bottom: 2px solid black;
+			border-top: 2px solid black;
+			/*background-color:#ae3;*/
+			/*background-image: linear-gradient(to top, rgb(62, 48, 85), #af3);*/
+			margin-top:170px;
+			margin-bottom:40px;
+		}
+		.embed-left {
+		    float: left;
+			border-radius: 32px;
+			margin-inline: 5%;
+			margin-bottom:40px;
+			margin-top:-120px;
+		}
+		.poop {
+		    display: flex;
+			gap: 20px;
+		}
+		h2{
+			font-family: Arka;
+			font-weight: bold;
+			font-style: normal;
+			color: rgb(255, 103, 209);
+			text-shadow:
+				-1px -1px 0px rgb(0, 0, 0),
+				-1px 1px 0px rgb(0, 0, 0),
+				1px 1px 0px rgb(0, 0, 0),
+				1px -1px 0px rgb(0, 0, 0);
+
+			margin:0;
+			font-size: 700%;
+			text-align: left;
+			padding: 0.1em 0;
+		}
+
+        /* Fullscreen Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(40, 10, 0, 0.8);
+			/* background-image: radial-gradient(rgba(41, 0, 0, 0.9),rgba(34, 77, 9, 0.685)); */
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow: hidden;
+			cursor: zoom-out;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            cursor: zoom-in;
+            transition: transform 0.2s ease-out;
+            position: absolute;
+        }
+        .zoomed {
+            transform: scale(2);
+            cursor: none;
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+
+		@media (mobile){}
+        @media (max-width: 888px) {
+            .grid-container {
+                column-count: 3;
+            }
+			.grid-item {
+				padding: 1px;
+			}
+			.lightbox .close {
+				font-size: 44px;
+			}
+        }
+        @media (max-width: 600px) {
+            .grid-container {
+                column-count: 2;
+            }
+			.grid-item {
+				padding: 5px;
+			}
+        }
+	</style>
+</head>
+<header>
+	<a href="https://nathanscoolstuff.com" style="text-align: left; font-family:SyneMono; font-weight:normal; font-style:monospace;">&lt;nathanscoolstuff</a>
+	<h1 style = "font-size: 7em; text-align: center; padding: 0.1em 0;">
+		<i>AR</i>
+	</h1>
+
+	<!-- trim -->
+	<div class="ornatetrim" style="border-top: 2px dashed #a50;">
+		<div class="virol"></div>
+	</div>
+</header>
+<body>
+<div style="background-color:white">
+    <!--Embeded video showcase-->
+    <iframe class="embed-left" src="https://player.vimeo.com/video/834266474?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="480" height="853" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" controls=0 title="Transfiguration"></iframe>
+    <div class="project-showcase">
+        <!--<div class="poop">-->
+
+        <div>
+
+        </div>
+
+        <h2>
+            Transfiguration
+        </h2>(2023)
+        <!--</div>-->
+
+        <p style="margin-inline: 128px; padding-bottom: 5%;">
+            <i>“a complete change of form or appearance into a more beautiful or spiritual state.”</i><br>
+            <br>
+            Social media and technology is undeniably transforming
+            our perception of ourselves, in what could be described
+            as a rotoscopic revolution. AR filters, like what you see
+            on Snapchat and Instagram, are a key foundation in
+            that.
+
+            <br>
+            <br>
+            The experience was designed for mobile with Meta's Spark AR Studio and can be found <a href ="https://www.instagram.com/ar/1269828496967969/">here.</a><br>
+            The controls are as follows:<br>
+            <br>
+            ● Opening your hand increases the
+            frequency of the high pass filter of a
+            microtonal synth<br>
+            ● Vertical movement controls the pitch<br>
+            ● Horizontal movement will trigger percussive sounds,
+            dynamically reacting to the velocity at
+            which the hand moves.<br>
+            Opening the mouth distorts the audio, creating
+            more chaos and noise.
+        </p>
+    </div>
+	<div class="grid-container">
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_transfiguration.webm"></div><p style = "padding: 0em 0.4em;">TRANSFIGURATION</p></div>
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_tama-tiktok.webm"></div><p style = "padding: 0em 0.4em;">Tamagotchi - TikTok variation</p></div>
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_badwebcam.webm"></div><p style = "padding: 0em 0.4em;">Bad Webcam - Snapchat filter</p></div>
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_doorcam.webm"></div><p style = "padding: 0em 0.4em;">Doorcam - Snapchat filter</p></div>
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_preacher-gotchi.webm"></div><p style = "padding: 0em 0.4em;">Tamagotchi - Snapchat filter</p></div>
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_tamagotchi.webm"></div><p style = "padding: 0em 0.4em;">Tamagotchi - Snapchat filter</p></div>
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_tamagreen.webm"></div><p style = "padding: 0em 0.4em;">Tamagotchi - Snapchat filter</p></div>
+		<div class="grid-item"><img src="/sources/ar/CoverDog.jpg"><p style = "padding: 0em 0.4em;">Tamagotchi - TikTok variation</p></div>
+		<div class="grid-item"><div><video autoplay loop src="/sources/ar/360p_yuh.webm"></div><p style = "padding: 0em 0.4em;">YUH</p></div>
+		<!--<div class="grid-item"><video autoplay loop src="/sources/ar/360p_tama-blue.webm"><p style = "padding: 0em 0.4em;">Tamagotchi - Snapchat filter</p></div>-->
+	</div>
+
+	<!-- Fullscreen Lightbox -->
+	<div class="lightbox" id="lightbox">
+		<span class="close" onclick="closeLightbox()">&times;</span>
+		<img id="lightbox-img" src="">
+	</div>
+	<script>
+		const gridItems = document.querySelectorAll('.grid-item img');
+		const lightbox = document.getElementById('lightbox');
+		const lightboxImg = document.getElementById('lightbox-img');
+		let isZoomed = false;
+
+		// Open fullscreen mode
+		gridItems.forEach(img => {
+			img.addEventListener('click', () => {
+				lightboxImg.src = img.src;
+				lightbox.style.display = "flex"; // Show lightbox
+				resetZoom();
+			});
+		});
+
+		// Toggle zoom when clicking on the image
+		lightboxImg.addEventListener("click", () => {
+			if (isZoomed) {
+				resetZoom();
+			} else {
+				isZoomed = true;
+				lightboxImg.classList.add("zoomed");
+				lightboxImg.style.transform = "scale(2) translate(0, 0)";
+				lightboxImg.style.cursor = "none";
+			}
+		});
+
+		// Move image based on cursor position
+		lightbox.addEventListener("mousemove", (e) => {
+			if (!isZoomed) return;
+
+			const rect = lightbox.getBoundingClientRect();
+			const imgRect = lightboxImg.getBoundingClientRect();
+
+			let offsetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+			let offsetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+
+			let moveX = -offsetX * (imgRect.width * 0.25); // Move image based on cursor position
+			let moveY = -offsetY * (imgRect.height * 0.25);
+
+			lightboxImg.style.transform = `scale(2) translate(${moveX}px, ${moveY}px)`;
+		});
+
+		// Reset zoom
+		function resetZoom() {
+			isZoomed = false;
+			lightboxImg.classList.remove("zoomed");
+			lightboxImg.style.transform = "scale(1) translate(0, 0)";
+			lightboxImg.style.cursor = "zoom-in";
+		}
+
+		// Function to close lightbox
+		function closeLightbox() {
+			lightbox.style.display = "none";
+			resetZoom();
+		}
+
+		// Close on clicking outside image
+		lightbox.addEventListener('click', (e) => {
+			if (e.target === lightbox) {
+				closeLightbox();
+			}
+		});
+	</script>
+</div>
+</body>
+<footer>
+	<div class="ornatetrim" style="border-bottom: 2px dashed #a50;">
+		<div class="virol"></div>
+	</div>
+	<p></p>
+	<nav>
+		<a href="https://www.instagram.com/nathans.cool.stuff/"	target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">instagram</a> |
+		<a href="https://vimeo.com/nathanrussell" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">vimeo</a> |
+		<a href="https://www.behance.net/nathanrussell8" 		target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">behance</a> |
+		<a href="mailto:nathanrussell@myyahoo.com" 				target="_blank" style="text-decoration: none; color: #333; margin: 0 10px;">email</a>
+	</nav>
+	<p style="font-size: 0.9em; font-weight: normal; color: #b55;">&copy; 2025 Nathan Russell. All rights reserved.</p>
+</footer>
+
+</html>
